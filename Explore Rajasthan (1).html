@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Explore Rajasthan</title>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Rozha+One&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffffff;--alt:#ffe6f0;--ink:#2a0f4d;--mute:#5d4a7e;--blue:#5b21b6;--saffron:#ffb703;--rose:#e0245e;--card:#fff;--line:#f3c6d9;--night:#2a0f4d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0b33;--alt:#250f47;--ink:#f8f1ff;--mute:#c3b3e0;--blue:#ffcf5c;--card:#2f1856;--line:#46286f}}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Mukta,system-ui,sans-serif}
+h1,h2,h3{font-family:'Rozha One',Georgia,serif;font-weight:400;line-height:1.15;margin:0 0 .5em}
+h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+section{padding:68px 20px}
+.wrap{max-width:1080px;margin:auto}
+.lead{color:var(--mute);max-width:62ch}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);border-bottom:3px solid var(--saffron);display:flex;align-items:center;padding:10px 20px}
+nav a.brand{font:1.3rem 'Rozha One',serif;color:var(--blue);text-decoration:none;margin-right:auto}
+#burger{width:46px;height:46px;border:0;background:var(--blue);border-radius:10px;cursor:pointer;display:grid;place-content:center;gap:5px}
+#burger i{display:block;width:22px;height:3px;background:#fff;border-radius:2px}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(320px,86vw);background:var(--night);color:#f3ecdf;z-index:50;transform:translateX(105%);transition:transform .35s;padding:calc(24px + env(safe-area-inset-top,0px)) 24px 24px;display:flex;flex-direction:column;gap:4px}
+#drawer.open{transform:none}
+#drawer a{color:#f3ecdf;text-decoration:none;padding:14px 8px;border-bottom:1px solid #353b66;font-size:1.1rem}
+#drawer a:hover{color:var(--saffron)}
+#drawer button{align-self:flex-end;background:none;border:0;color:#f3ecdf;font-size:2rem;cursor:pointer;line-height:1}
+#veil{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:none}
+#veil.on{display:block}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
+.btn{display:inline-block;background:var(--saffron);color:#1d2340;border:0;padding:13px 24px;border-radius:999px;font:600 1rem Mukta,sans-serif;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:inherit;border:2px solid currentColor}
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;color:#fff;overflow:hidden;padding:0 20px;background:radial-gradient(circle at 78% 62%,#fff1a8 0,#ffb703 20%,transparent 50%),linear-gradient(#2a0f4d 0%,#7b1e7a 35%,#e0245e 62%,#ff8a00 100%)}
+.hero svg{position:absolute;left:0;bottom:0;width:100%;height:64%}
+.hero .wrap{position:relative;z-index:2;padding-bottom:20vh}
+.hero h1{font-size:clamp(3rem,10vw,7rem);margin:0;text-shadow:0 3px 20px rgba(0,0,0,.35)}
+.hero p{max-width:46ch;font-size:1.2rem;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.about{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:center}
+.photo{aspect-ratio:3/4;border-radius:130px 130px 12px 12px;background:linear-gradient(160deg,var(--blue),var(--rose));display:grid;place-items:center;color:#fff;text-align:center;font-size:.85rem;padding:20px}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.facts li{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 14px;font-size:.9rem}
+.alt{background:var(--alt)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.dest{border-radius:14px;color:#fff;padding:20px;min-height:170px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;transition:transform .2s}
+.dest:hover{transform:translateY(-4px)}
+.dest h3{font-size:1.5rem;margin:0}
+.dest span{font-size:.9rem;opacity:.92}
+.dest[hidden]{display:none}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+.why div{background:var(--card);border-top:5px solid var(--saffron);border-radius:12px;padding:20px}
+.why b{font:1.25rem 'Rozha One',serif;display:block;margin-bottom:6px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.chip{border-left:5px solid var(--rose);background:var(--card);padding:14px 16px;border-radius:0 10px 10px 0}
+.chip b{display:block}.chip span{color:var(--mute);font-size:.93rem}
+.usp{background:var(--night);color:#f3ecdf}
+.usp .lead{color:#b9bdd6}
+.stage{perspective:1100px;height:300px;position:relative;margin:34px 0 10px;touch-action:pan-y;user-select:none}
+.slide{position:absolute;left:50%;top:0;width:min(300px,72vw);height:280px;margin-left:calc(min(300px,72vw)/-2);border-radius:18px;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;transition:transform .7s,opacity .7s;backface-visibility:hidden}
+.slide h3{font-size:1.6rem}.slide p{margin:0;font-size:.95rem}
+.ctl{display:flex;justify-content:center;gap:12px}
+.ctl button{width:44px;height:44px;border-radius:50%;border:2px solid #f3ecdf;background:transparent;color:#f3ecdf;font-size:1.2rem;cursor:pointer}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;color:var(--mute)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+label{display:block;font-weight:600;margin-top:12px;font-size:.95rem}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;margin-top:4px}
+#msg{margin-top:12px;color:var(--blue);font-weight:600}
+footer{padding:28px 20px;text-align:center;color:var(--mute);border-top:1px solid var(--line);font-size:.9rem}
+/* inner pages */
+.banner{color:#fff;padding:70px 20px 110px;position:relative;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.dest{min-height:200px}
+.banner a{color:#fff}
+.banner h1{font-size:clamp(2.6rem,8vw,5rem);margin:.2em 0 .1em}
+.banner p{max-width:60ch;font-size:1.15rem;margin:0}
+.pl{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:0;list-style:none;margin:20px 0}
+.pl li{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--saffron);border-radius:10px;padding:14px 16px}
+.pl b{display:block}
+.pl span{color:var(--mute);font-size:.95rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:16px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.links a{border:1px solid var(--line);background:var(--card);color:var(--blue);padding:6px 14px;border-radius:999px;text-decoration:none;font-size:.92rem}
+@media(max-width:760px){.about,.two{grid-template-columns:1fr}.photo{max-width:220px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.slide,#drawer,.dest{transition:none}}
+:root,:root:not([data-theme="light"]){--bg:#0d3a8f;--alt:#08706e;--ink:#fff8e1;--mute:#d3e0ff;--blue:#ffc21a;--saffron:#ffb000;--rose:#ff5a2e;--card:#fff;--line:rgba(255,255,255,.28);--night:#0a1747}
+h1,h2,h3,nav a.brand,.why b{font-family:'Yatra One','Rozha One',Georgia,serif}
+nav{background:#0a1747}
+#burger{background:#ffb000}#burger i{background:#0a1747}
+section:not([hidden]){position:relative;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 2L46 24 24 46 2 24z' fill='none' stroke='rgba(255,255,255,.12)' stroke-width='1.5'/%3E%3Ccircle cx='24' cy='24' r='3' fill='rgba(255,190,0,.3)'/%3E%3C/svg%3E")}
+section:not([hidden])::before{content:'';position:absolute;left:0;right:0;top:0;height:20px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20'%3E%3Cpath d='M0 0H40Q40 14 20 20Q0 14 0 0z' fill='%23ffb000'/%3E%3C/svg%3E") repeat-x}
+#groups{background-color:#c7341c}
+.hero{background:radial-gradient(circle at 80% 58%,#fff0a0 0,#ffc21a 14%,transparent 42%),linear-gradient(#071a52 0%,#0d3a8f 40%,#1b7fd1 62%,#ff9a1f 100%)}
+.hero::before{content:'';position:absolute;inset:0 0 50%;background:radial-gradient(2px 2px at 12% 20%,#fff,transparent),radial-gradient(2px 2px at 30% 8%,#fff,transparent),radial-gradient(1.5px 1.5px at 48% 24%,#fff,transparent),radial-gradient(2px 2px at 63% 10%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 22% 36%,#fff,transparent)}
+.hero svg:not(.car):not(.dune)>path{fill:#1a3f94;opacity:.75}
+.hero svg g path{fill:#07123a}
+.hero svg.dune,.hero svg.car{position:absolute;left:0;bottom:0;z-index:1}
+.hero svg.dune{width:100%;height:16%}
+.hero svg.car{width:min(360px,62vw);height:auto;bottom:2%;fill:#150a35;animation:walk 45s linear infinite}
+@keyframes walk{from{transform:translateX(-110%)}to{transform:translateX(100vw)}}
+.hindi{font:clamp(1.4rem,4vw,2.4rem) 'Yatra One',serif;color:#ffc21a;margin-bottom:-6px}
+.hero h1{font-family:'Yatra One','Rozha One',serif;color:#ffc21a;letter-spacing:.02em;text-shadow:4px 4px 0 #d6361f,8px 8px 0 #07123a}
+.photo{background:linear-gradient(160deg,#ffb000,#e4572e);color:#0a1747;box-shadow:0 0 0 5px #ffb000,0 0 0 9px #0a1747,0 0 0 11px #ffb000}
+.facts li{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#fff}
+.why div,.chip,.pl li,.box{background:#fff;color:#16204a;border:0}
+.chip span,.pl span{color:#43507a}
+.why div{border-radius:90px 90px 14px 14px;padding:44px 22px 22px;text-align:center}
+.why b{color:#0a1747}
+.chip{border-left:6px solid #ff5a2e;border-radius:6px 36px 6px 36px}
+.chip b::before{content:'♥ ';color:#e4572e}
+.box{border-radius:6px 36px 6px 36px}
+.pl li{position:relative;margin-top:10px;border-radius:0 0 16px 16px}
+.pl li::before{content:'';position:absolute;left:0;right:0;top:-10px;height:10px;background:repeating-linear-gradient(90deg,#fff 0 12px,transparent 12px 20px)}
+.links a{background:#ffb000;color:#0a1747;border:0;font-weight:600}
+.dest{border-radius:140px 140px 18px 18px;min-height:250px;box-shadow:0 0 0 3px #ffb000;padding-top:60px;text-align:center;align-items:center}
+.dancers{display:flex;justify-content:center;gap:10px;margin-top:38px;flex-wrap:wrap}
+.dancers svg{width:64px;height:106px;color:#ff5a2e;animation:sway 2.2s ease-in-out infinite alternate;transform-origin:50% 100%}
+.dancers svg:nth-child(2n){animation-delay:-1.1s;color:#ffb000}
+.dancers svg:nth-child(3n){color:#12c2b9}
+@keyframes sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+.stage{height:400px}
+.slide{width:min(250px,64vw);height:360px;margin-left:calc(min(250px,64vw)/-2);border-radius:125px 125px 14px 14px;overflow:hidden;padding:0 20px 28px;box-shadow:0 0 0 5px #ffb000,0 0 0 9px #0a1747,0 0 0 11px #ffb000;text-align:center}
+.slide h3,.slide p{position:relative;z-index:1;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.sh{position:absolute;top:0;bottom:0;width:50.5%;z-index:3;background:repeating-linear-gradient(90deg,#ffb000 0 10px,#c76a00 10px 12px);box-shadow:inset 0 0 0 3px #7a3b00;transition:transform .9s cubic-bezier(.6,0,.2,1) .25s}
+.sh.l{left:0}.sh.r{right:0}
+.slide.on .sh.l{transform:translateX(-101%)}
+.slide.on .sh.r{transform:translateX(101%)}
+#contact{background:linear-gradient(#0a1747 0%,#2a2a8f 40%,#e4572e 78%,#ffb000 100%);padding-bottom:240px;overflow:hidden}
+#contact .scene{position:absolute;left:0;right:0;bottom:0;width:100%;height:230px;pointer-events:none}
+#contact .two{position:relative;z-index:2}
+#contact form{background:#fff;color:#0a1747;border-radius:70px 70px 16px 16px;padding:54px 26px 18px;box-shadow:0 0 0 4px #ffb000}
+#contact label{color:#0a1747}
+#contact #msg{color:#0a1747}
+input,select,textarea{background:#fff;color:#16204a;border-color:#d9d2ee}
+footer{background:#0a1747;color:#d3e0ff}
+@media(prefers-reduced-motion:reduce){.hero svg.car,.dancers svg{animation:none}.sh{transition:none}}
+.an{overflow:visible;display:block}
+.an .lg{animation:lgs .9s ease-in-out infinite alternate;transform-origin:0 0}
+.an .bob{animation:bob .45s ease-in-out infinite alternate}
+.an .neck{animation:nk .9s ease-in-out infinite alternate}
+.an .tail{animation:tl 1.1s ease-in-out infinite alternate}
+.an .ear{animation:er .6s ease-in-out infinite alternate}
+.an .trunk{animation:tr 1.2s ease-in-out infinite alternate}
+@keyframes lgs{from{transform:rotate(-20deg)}to{transform:rotate(20deg)}}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-2px)}}
+@keyframes nk{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+@keyframes tl{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+@keyframes er{from{transform:rotate(-10deg)}to{transform:rotate(8deg)}}
+@keyframes tr{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+.an.camel{width:96px;height:80px}.an.horse{width:92px;height:76px}.an.elephant{width:126px;height:90px}
+.hero .car{position:absolute;inset:0;z-index:1;color:#150a35;pointer-events:none;overflow:hidden}
+#contact .car2{position:absolute;left:0;right:0;bottom:0;height:230px;z-index:1;color:#1a0d3a;pointer-events:none;overflow:hidden}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
+.g4 .box{margin:0}
+@media(prefers-reduced-motion:reduce){.an,.an *{animation:none!important}.an.camel,.an.horse,.an.elephant{left:40%!important}}
+@media(max-width:640px){
+body{font-size:15px}
+section:not([hidden]){padding:44px 14px 40px}
+h2{font-size:1.45rem}
+nav{padding:8px 14px}nav a.brand{font-size:1.1rem}#burger{width:40px;height:40px}
+.hero{min-height:78vh;padding:0 14px}
+.hero h1{font-size:2.5rem;text-shadow:3px 3px 0 #d6361f,5px 5px 0 #07123a}
+.hindi{font-size:1.15rem}.hero p{font-size:1rem}
+.hero .wrap{padding-bottom:16vh}
+.btn{padding:10px 18px;font-size:.92rem}
+.grid{grid-template-columns:repeat(2,1fr);gap:10px}
+.dest{min-height:175px;padding:44px 8px 12px;border-radius:80px 80px 14px 14px}
+.dest h3{font-size:1.05rem}.dest span{font-size:.72rem;line-height:1.3}
+.why,.chips{grid-template-columns:repeat(2,1fr);gap:10px}
+.why div{padding:34px 10px 14px;font-size:.82rem;border-radius:60px 60px 12px 12px}
+.why b{font-size:1rem}
+.chip{padding:10px;font-size:.85rem}.chip span{font-size:.75rem}
+.photo{max-width:150px}
+.stage{height:330px}
+.slide{width:min(190px,56vw);margin-left:calc(min(190px,56vw)/-2);height:290px;border-radius:95px 95px 12px 12px}
+.slide h3{font-size:1.2rem}.slide p{font-size:.8rem}
+.dancers svg{width:40px;height:68px}
+.an.camel{width:62px;height:52px}.an.horse{width:60px;height:50px}.an.elephant{width:80px;height:57px}
+.banner{padding:40px 14px 80px}.banner h1{font-size:2.2rem}.banner p{font-size:1rem}
+.pl li{padding:10px 12px;font-size:.88rem}
+#contact{padding-bottom:170px}#contact .scene{height:160px}#contact .car2{height:160px}
+#contact form{padding:44px 16px 14px;border-radius:50px 50px 14px 14px}
+.lead{font-size:.95rem}
+.g4{grid-template-columns:1fr}.box{font-size:.9rem}
+}
+
+#places::before,#actsec::before,#groups::before{display:none}
+#places,#actsec,#groups{padding-bottom:180px;background-repeat:no-repeat}
+#places .dest,#actsec .dest,#groups .dest{position:relative;border-radius:0}
+#places .dest{clip-path:polygon(0 12px,12.5% 12px,12.5% 0,25% 0,25% 12px,37.5% 12px,37.5% 0,50% 0,50% 12px,62.5% 12px,62.5% 0,75% 0,75% 12px,87.5% 12px,87.5% 0,100% 0,100% 100%,0 100%);padding:30px 12px 62px;min-height:230px;box-shadow:inset 0 -6px 0 #ffb000}
+#places .dest::after{content:'';position:absolute;bottom:0;left:50%;width:36px;height:46px;margin-left:-18px;border-radius:18px 18px 0 0;background:rgba(6,16,58,.6)}
+#actsec .dest{clip-path:polygon(50% 0,100% 30%,100% 100%,0 100%,0 30%);padding:70px 12px 52px;min-height:240px;box-shadow:none}
+#actsec .dest::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 14px,transparent 14px 28px)}
+#actsec .dest::after{content:'';position:absolute;bottom:0;left:50%;margin-left:-20px;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:40px solid rgba(0,0,0,.5)}
+#actsec .dest h3,#actsec .dest span{position:relative;z-index:1}
+#groups .dest{clip-path:polygon(50% 0,60% 9%,76% 17%,92% 28%,100% 40%,100% 100%,0 100%,0 40%,8% 28%,24% 17%,40% 9%);padding:90px 14px 18px;min-height:250px;box-shadow:inset 0 -6px 0 #ffb000}
+@media(max-width:640px){
+#places,#actsec,#groups{padding-bottom:120px}
+#places .dest{padding:26px 6px 46px;min-height:190px}
+#places .dest::after{width:26px;height:34px;margin-left:-13px}
+#actsec .dest{padding:54px 6px 44px;min-height:200px}
+#actsec .dest::after{border-left-width:14px;border-right-width:14px;border-bottom-width:28px;margin-left:-14px}
+#groups .dest{padding:72px 8px 14px;min-height:210px}
+}
+</style>
+</head>
+<body>
+<svg style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
+<symbol id="camel" viewBox="0 0 100 80"><circle cx="36" cy="22" r="11"/><rect x="12" y="28" width="60" height="20" rx="10"/><path d="M62 34L74 34 84 12 92 12 96 17 89 21 82 44z"/><ellipse cx="91" cy="15" rx="9" ry="5"/><rect x="16" y="44" width="5" height="34"/><rect x="26" y="44" width="5" height="34"/><rect x="54" y="44" width="5" height="34"/><rect x="64" y="44" width="5" height="34"/><path d="M13 32L6 56 10 57 18 36z"/></symbol>
+<symbol id="elephant" viewBox="0 0 110 80"><ellipse cx="46" cy="38" rx="32" ry="22"/><circle cx="82" cy="32" r="17"/><path d="M94 36Q108 48 98 70L91 70Q98 52 88 44z"/><rect x="22" y="52" width="10" height="26"/><rect x="36" y="56" width="10" height="22"/><rect x="56" y="56" width="10" height="22"/><rect x="68" y="52" width="10" height="26"/><path d="M30 14H62L58 22H34z"/><path d="M34 14Q46 -4 58 14z"/><path d="M16 32L8 58 13 58 22 36z"/></symbol>
+<symbol id="dancer" viewBox="0 0 60 100"><path d="M24 6Q30 -2 36 6L46 44 30 26 14 44z" fill="currentColor" opacity=".75"/><circle cx="30" cy="13" r="7" fill="#ffe0a3"/><rect x="25" y="20" width="10" height="18" rx="4" fill="#ffe0a3"/><path d="M25 24L8 10M35 24L52 8" stroke="#ffe0a3" stroke-width="4" stroke-linecap="round"/><path d="M24 36H36L57 92Q30 101 3 92z" fill="currentColor"/><path d="M8 84Q30 95 52 84" stroke="#ffb000" stroke-width="3" fill="none"/></symbol>
+</defs></svg>
+<nav aria-label="Main"><a class="brand" href="#">Explore Rajasthan</a><button id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i><i></i></button></nav>
+<div id="veil"></div>
+<aside id="drawer" aria-label="Menu"><button id="x" aria-label="Close menu">×</button>
+<a href="#about">About us</a><a href="#history">History of Rajasthan</a><a href="#why">What we offer</a><a href="#places">Places to explore</a><a href="#groups">Tours for groups</a><a href="#contact">Contact us</a><a href="#faq">FAQs</a></aside>
+
+<main id="home">
+<header class="hero">
+  <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path fill="#5a2358" opacity=".6" d="M0 400V250l60-20 40 30 70-60 50 20 60-50 90 40 80-30 70 50 90-70 100 40 80-30 120 60 90-40 80 30 60-20 50 20v200z"/>
+    <g fill="#241238">
+      <path d="M0 400V300h140v-30h20v-30h30v30h20v30h40v-60h24v-24h18v24h24v60h60v-40h20v-26h20v26h20v40h50v-90h30v-20h18v20h30v90h90v-50h26v-30h20v30h26v50h80v-34h24v-20h22v20h24v34h60v-70h30v-26h20v26h30v70h60v-40h40v40h110v100z"/>
+      <path d="M300 400v-170h22v-30h12v30h22v170zM520 400v-130l20-30 20 30v130zM1000 400v-110l24-24 24 24v110z"/>
+    </g>
+  </svg>
+  <svg class="dune" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7bb4d"/><stop offset="1" stop-color="#bf6204"/></linearGradient></defs><path d="M0 40Q250 0 520 36T1200 8V100H0z" fill="#f2a62e" opacity=".75"/><path d="M0 60Q200 10 420 50T800 40T1200 30V100H0z" fill="url(#dg)"/><path d="M0 60Q200 10 420 50T800 40T1200 30" fill="none" stroke="#ffe2a0" stroke-width="1.5" opacity=".7"/></svg>
+  <svg class="car" viewBox="0 0 330 80" aria-hidden="true"><use href="#camel" x="0" width="100" height="80"/><use href="#camel" x="105" width="100" height="80"/><use href="#elephant" x="215" width="110" height="80"/></svg>
+  <div class="wrap">
+    <div class="hindi">राजस्थान घूमिए</div>
+    <h1>Explore Rajasthan</h1>
+    <p>Forts, palaces, desert nights and living art, guided by someone who has walked every one of them.</p>
+    <p><a class="btn" href="#contact">Plan your trip</a> &nbsp; <a class="btn ghost" href="#places">See destinations</a></p>
+  </div>
+</header>
+
+<section id="about"><div class="wrap about">
+  <div class="photo" role="img" aria-label="Photo placeholder for Priyansh Sharma"><div>Add Priyansh’s photo here</div></div>
+  <div>
+    <h2>Meet Priyansh Sharma</h2>
+    <p class="lead">Priyansh is a Jaipur-born travel guide with deep experience in Rajasthan tourism. He has been to every destination on this site, and he is passionate about art and history. He travels with every group as your guide, so you hear the stories first-hand.</p>
+    <p class="lead">Explore Rajasthan is his initiative to show visitors the state beyond the postcard: the museums, the architecture, the food, and the nights.</p>
+    <ul class="facts"><li>Born and raised in Jaipur</li><li>Has travelled Kerala</li><li>Karnataka</li><li>Tamil Nadu</li><li>Varanasi</li><li>Delhi</li></ul>
+  </div>
+</div></section>
+
+<section class="alt" id="whyraj"><div class="wrap">
+  <h2>Why Rajasthan?</h2>
+  <p class="lead">Few states pack this much into one journey. Heritage is everywhere, and the desert is only the beginning.</p>
+  <div class="why">
+    <div><b>Thar Desert</b>Golden dunes around Jaisalmer and Bikaner, camel safaris and nights under the stars.</div>
+    <div><b>Heritage everywhere</b>Hill forts, palaces, havelis and stepwells in almost every district, six forts on the UNESCO list.</div>
+    <div><b>Lakes and hills</b>Udaipur’s lakes, the ancient Aravalli range and cool green pockets.</div>
+    <div><b>Wildlife</b>Tigers at Ranthambore and Sariska, birds, leopards and desert fauna.</div>
+    <div><b>Art and craft</b>Miniature painting, block printing, blue pottery and folk music.</div>
+    <div><b>Food and festivals</b>Dal baati churma, laal maas, kachori, and fairs like Pushkar and Desert Festival.</div>
+  </div>
+  <p><a class="btn ghost" href="#history" style="color:var(--blue)">Read the history of Rajasthan</a></p>
+</div></section>
+
+<section id="places"><div class="wrap">
+  <h2>Where we take you</h2>
+  <p class="lead">Open a city for its history, places to visit and best time to go.</p>
+  <div class="grid" id="dgrid" style="margin-top:24px"></div>
+  <p><button class="btn" id="seeall" aria-expanded="false">See all destinations</button></p>
+</div></section>
+
+<section class="alt" id="groups"><div class="wrap">
+  <h2>Tours built for your group</h2>
+  <p class="lead">Same state, different trip. Choose who is travelling.</p>
+  <div class="grid" id="sgrid" style="margin-top:24px"></div>
+</div></section>
+
+<section id="cover"><div class="wrap">
+  <h2>Everything Rajasthan has to offer</h2>
+  <div class="chips" id="chips"></div>
+  <p class="lead" style="text-align:center;margin:44px auto 0">Ghoomar, Kalbeliya and Terah Tali: music and dance are part of the evening on our trips.</p>
+  <div class="dancers" aria-hidden="true"><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg><svg viewBox="0 0 60 100"><use href="#dancer" width="60" height="100"/></svg></div>
+</div></section>
+
+<section id="why" class="usp"><div class="wrap">
+  <h2>What we offer</h2>
+  <p class="lead">Swipe, drag or use the arrows. It also turns on its own.</p>
+  <div class="stage" id="stage" aria-roledescription="carousel" aria-label="What we offer"></div>
+  <div class="ctl"><button id="prev" aria-label="Previous">‹</button><button id="pause" aria-label="Pause autoplay">⏸</button><button id="next" aria-label="Next">›</button></div>
+</div></section>
+
+<section id="faq" class="alt"><div class="wrap" style="max-width:780px">
+  <h2>FAQs</h2>
+  <details><summary>Will Priyansh be on the trip?</summary><p>Yes. He accompanies groups as your guide.</p></details>
+  <details><summary>Do you handle school and college trips?</summary><p>Yes, with educational itineraries, safety planning and parent communication.</p></details>
+  <details><summary>Can you host international guests?</summary><p>Yes. English-speaking guides, airport pickup and comfortable stays.</p></details>
+  <details><summary>Do you plan corporate trips?</summary><p>Yes: team outings, offsites and incentive trips with one point of contact.</p></details>
+  <details><summary>How do I get a price?</summary><p>Send the enquiry form with group size, dates and places. We reply with a quote.</p></details>
+</div></section>
+</main>
+
+<main id="page" hidden></main>
+
+<section id="contact" class="usp"><svg class="scene" viewBox="0 0 1200 230" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle cx="860" cy="110" r="58" fill="#ffe08a" opacity=".9"/><path d="M0 150Q200 90 420 140T820 120T1200 100V230H0z" fill="#c4620a"/><path d="M0 150Q200 90 420 140T820 120T1200 100" fill="none" stroke="#ffe08a" stroke-width="2" stroke-dasharray="6 8"/><path d="M0 190Q260 140 520 180T1200 160V230H0z" fill="#8f3f05"/><g fill="#1a0d3a"><use href="#camel" x="420" y="104" width="110" height="88"/><use href="#camel" x="530" y="110" width="100" height="80"/><use href="#elephant" x="660" y="84" width="160" height="117"/></g></svg><div class="wrap two">
+  <div><h2>Contact us</h2><p class="lead">Tell us who is travelling, where and when. Priyansh will reply with a plan and a quote.</p>
+  <p class="lead">Phone: +91 00000 00000<br>Email: hello@explorerajasthan.example<br>Based in Jaipur, Rajasthan</p></div>
+  <form id="f">
+    <label for="n">Name</label><input id="n" required>
+    <label for="c">Phone or email</label><input id="c" required>
+    <label for="g">Group type</label><select id="g"><option>Individual or family</option><option>Schools</option><option>Colleges</option><option>Corporate teams</option><option>Friends and group tours</option><option>International travellers</option></select>
+    <label for="q">Destinations, dates, group size, questions</label><textarea id="q" rows="4"></textarea>
+    <p><button class="btn" type="submit">Send enquiry</button></p>
+    <div id="msg" role="status"></div>
+  </form>
+</div></section>
+<footer>Made with ♥ in Jaipur · Explore Rajasthan · Draft site. Replace the contact details with your own.</footer>
+
+<script>
+var D=[
+["jaipur","Jaipur","The Pink City","#e4572e","Jaipur was founded in 1727 by Maharaja Sawai Jai Singh II of the Kachwaha clan, who moved his capital down from Amer. It was one of India’s first planned cities, laid out on a grid with wide streets and, in 1876, painted pink to welcome a royal guest. The walled city joined the UNESCO World Heritage list in 2019.",["Amer Fort|Hilltop fort-palace with mirror work and elephant-era ramps","City Palace|Royal residence, part museum, part still home to the family","Hawa Mahal|The honeycomb facade of 953 small windows","Jantar Mantar|18th-century astronomical instruments, UNESCO listed","Nahargarh and Jaigarh|Sunset views and one of the world’s largest wheeled cannons","Albert Hall Museum|Textiles, miniatures, metalwork and a mummy","Johari and Bapu Bazaars|Jewellery, lac bangles, bandhani and juttis"],"October to March"],
+["jodhpur","Jodhpur","The Blue City under Mehrangarh","#1b4b91","Rao Jodha of the Rathore clan founded Jodhpur in 1459 as the capital of Marwar. Mehrangarh Fort rises about 125 metres above the plain, and the old city below is famous for its blue-washed houses. The region grew rich on the caravan trade in spices, silk and opium.",["Mehrangarh Fort|One of India’s largest forts, with an excellent museum and audio guide","Jaswant Thada|White marble cenotaph from the 1890s","Umaid Bhawan Palace|20th-century palace, part hotel and museum","Clock Tower and Sardar Market|Spices, textiles and street food","Mandore Gardens|Old Marwar capital with cenotaphs","Brahmpuri lanes|Walk the blue houses below the fort"],"October to March"],
+["jaisalmer","Jaisalmer","The Golden City of the Thar","#c98a1b","Rawal Jaisal founded Jaisalmer in 1156, and its position on caravan routes between India and Central Asia made it wealthy. Its yellow sandstone fort is a living fort: families still live inside the walls. Merchant havelis carved like lace line the lanes below.",["Jaisalmer Fort|Sonar Qila, with Jain temples, shops and homes inside","Patwon Ki Haveli|Cluster of ornate merchant mansions","Gadisar Lake|Old water reservoir with small temples","Sam Sand Dunes|Camel rides and desert camps for sunset and night","Kuldhara|Abandoned village with many local legends","Bada Bagh|Royal cenotaphs at sunset"],"October to February"],
+["udaipur","Udaipur","The City of Lakes","#2f7a78","Maharana Udai Singh II of Mewar founded Udaipur in 1559 after the sack of Chittorgarh. The city grew around Lake Pichola, with palaces on the shore and islands. It is known for miniature painting, puppetry and Mewar’s craft traditions.",["City Palace|Large palace complex on Lake Pichola","Lake Pichola boat ride|Sunset ride past Jag Mandir","Saheliyon Ki Bari|Fountain garden for royal women","Bagore Ki Haveli|Museum and evening folk dance","Sajjangarh|Hilltop monsoon palace with city views","Shilpgram|Crafts village and cultural fair grounds"],"September to March"],
+["chittorgarh","Chittorgarh","Fort of Mewar’s Valour","#7a4a2b","Chittorgarh was the capital of Mewar for centuries before Udaipur and is Rajasthan’s largest fort, spread over a hill of about 700 acres. It was besieged three times, in 1303, 1535 and 1568, and its stories of sacrifice are a core part of Rajput memory. It is part of the UNESCO Hill Forts of Rajasthan.",["Vijay Stambh|Nine-storey Tower of Victory built in the 15th century","Kirti Stambh|Jain tower of fame to the first Tirthankara","Rani Padmini Palace|Palace by a pond with the legend of Padmini","Kumbha Palace|Ruined royal complex of Rana Kumbha","Meera Temple|Shrine linked to the poet-saint Meerabai","Gaumukh Kund|Spring-fed reservoir within the fort"],"October to March"],
+["bikaner","Bikaner","Camels, Sweets and Junagarh","#a2452e","Rao Bika founded Bikaner in 1488 in the dry north-west of the Thar. Its rulers built Junagarh Fort, which was never conquered, and the town is known for its havelis, bhujia and sweets. Camel breeding is part of local life.",["Junagarh Fort|Palaces and museum with fine interiors","Karni Mata Temple, Deshnok|Famous for its holy rats","National Research Centre on Camel|Camel breeding farm and museum","Lalgarh Palace|Indo-Saracenic palace and museum","Bhandasar Jain Temple|Painted and mirrored interiors","Bikaneri bhujia and sweets|Taste them in Kote Gate market"],"October to March"],
+["bundi","Bundi","Stepwells and Painted Palaces","#4b5fa8","Bundi was the capital of the Hada Rajputs and is quieter than the big cities. Its palace walls hold some of Rajasthan’s finest murals in the Bundi school of painting, and the town is dotted with stepwells and lakes. Taragarh Fort overlooks it all.",["Bundi Palace and Chitrashala|Wall paintings in blue, green and gold","Taragarh Fort|Hill fort with views across town","Raniji Ki Baori|One of the most elaborate stepwells in the region","Nawal Sagar|Lake in the centre of the old town","Sukh Mahal and Kshar Bagh|Royal garden and cenotaphs","Old town walk|Blue lanes and small temples"],"October to March"],
+["ranthambore","Ranthambore and Sawai Madhopur","Tigers and a Fort in the Forest","#3f7a3a","Ranthambore National Park surrounds a 10th-century fort that is a UNESCO World Heritage site. The park became a famous tiger reserve, and the old fort walls, lakes and ruins make the wildlife viewing more atmospheric. Sawai Madhopur is the town and rail base for the visit.",["Safari zones|Morning and afternoon jeep or canter safaris","Ranthambore Fort|Walk the ramparts and see the Ganesh temple","Padam Talao|Lake where deer and tigers are often sighted","Surwal Lake|Birds and quiet sunsets","Ranthambore School of Art|Local painting and crafts","Kachida Valley|Leopard country at the edge of the park"],"October to April; the park is closed in the monsoon months"],
+["sariska","Sariska","Forest, Ruins and Temples","#58702f","Sariska is a tiger reserve in the Aravalli hills near Alwar, with old ruins, temples and wildlife in dry deciduous forest. It is an easy trip from Jaipur or Delhi. Around it are palaces and forts of the Alwar region.",["Sariska Tiger Reserve|Jeep safari in Aravalli forest","Kankwadi Fort|Fort inside the reserve","Pandupol Hanuman Temple|Forest shrine linked to the Mahabharata","Bhangarh|Ruined 17th-century town nearby","Alwar City Palace|Museum with manuscripts and weapons","Siliserh Lake|Lakeside palace near Alwar"],"October to June"],
+["kota","Kota","Chambal Gardens and Museums","#8a4e7a","Kota became a kingdom in the 17th century and grew on the banks of the Chambal river. Today it is also India’s coaching capital, so the city is young and busy. It has a fort-palace, museums and riverside parks.",["Kota Garh|City Palace with the Rao Madho Singh Museum","Jag Mandir|Palace in the middle of Kishore Sagar","Garadia Mahadev|Temple and viewpoint on the Chambal","Chambal Garden|Riverside park with crocodiles","Seven Wonders Park|Replicas of world monuments","Kota Doria sarees|Light cotton-silk weaving to shop for"],"October to March"],
+["rajsamand","Rajsamand","Kumbhalgarh, Haldighati and Shrinathji","#9a5a2a","Rajsamand district holds some of Mewar’s best-known sites. Kumbhalgarh, built by Rana Kumbha in the 15th century, has one of the longest continuous fort walls in the world. Haldighati saw the 1576 battle of Maharana Pratap and Akbar’s army, and Nathdwara is a major Vaishnav pilgrimage town.",["Kumbhalgarh Fort|Walk the long wall and see the hilltop temples","Haldighati|Battlefield and Maharana Pratap memorial","Nathdwara|Shrinathji temple and Pichwai painting","Rajsamand Lake|17th-century lake built by Rana Raj Singh","Dwarkadhish Temple, Kankroli|Major temple on the lakeshore","Kumbhalgarh Wildlife Sanctuary|Forest walks and safaris"],"October to March"],
+["mehandipur-balaji","Mehandipur Balaji","A Hanuman Pilgrimage","#6b3d3d","Mehandipur Balaji is a temple dedicated to Hanuman in the Dausa district, drawing pilgrims from many parts of India. It is known for its devotional practices and a very busy atmosphere. We plan visits with respect for the faith and with attention to comfort and crowds.",["Balaji temple|Main shrine, busy at weekends and festivals","Abhaneri|Chand Baori, one of India’s deepest stepwells","Harshat Mata Temple|Old temple next to the stepwell","Bhangarh|Ruined town in the same region","Dausa fort|Hill fort above the town","Combine with Jaipur|Easy to add to a Jaipur trip"],"All year; avoid peak festival days if you want quieter visits"]];
+
+var S=[
+["schools","Schools","Learning that stays with them","#1b4b91","Large groups, safe travel and an education-first itinerary for school students.",[["Large groups","Planning and transport for classes of 40 to several hundred."],["Safety first","Supervised itineraries, vetted stays, trained staff and a clear emergency plan."],["Parent engagement","Itinerary shared in advance, and regular updates to parents during the trip."],["Education built in","Worksheets, museum visits and wildlife and heritage learning linked to the syllabus."]],["jaipur","ranthambore","chittorgarh","bundi"]],
+["colleges","Colleges","History, art and architecture, up close","#8a4e7a","Budget-friendly trips for college groups, student clubs and department tours.",[["Study tours","Architecture, history, design and art walks guided by someone who loves the subject."],["Budget focus","Group rates, shared stays and student-friendly meals."],["Fun and nights","Desert camps, bonfires, bazaars and safe evening plans."],["Clubs and societies","Photography, heritage and cultural trips for student societies."]],["udaipur","jodhpur","jaisalmer","jaipur"]],
+["corporate","Corporate Teams","Team trips and offsites","#2f7a78","Services and visits for companies that want a planned, comfortable and memorable trip.",[["Team outings","Heritage walks, games and team challenges."],["Offsites","Meeting-friendly palace hotels and resorts."],["Single point of contact","One coordinator for transport, stays, meals and schedules."],["Incentive trips","Rewards trips with experiences like a desert dinner or a private palace tour."]],["udaipur","jaipur","jodhpur","jaisalmer"]],
+["friends","Friends and Group Tours","Recreation, enjoyment and games","#c98a1b","For friend groups, families and mixed groups who want fun first.",[["Fun first","Camps, bonfires, music nights and group games."],["Adventure","Camel and jeep safaris, ziplines and wildlife drives."],["Group packages","Flexible package for groups of 6 and up."],["Nightlife and food","Rooftop dinners, markets and street-food walks."]],["jaisalmer","udaipur","jaipur","ranthambore"]],
+["international","International Travellers","Rajasthan, explained","#0ea5a4","Comfortable, well-guided travel for visitors from outside India.",[["Easy arrival","Airport pickup and drop with clear itineraries."],["English-speaking guide","Priyansh guides, with context on history, art and customs."],["Comfort and safety","Selected stays, reliable transport and local support."],["Culture hands-on","Cooking classes, block printing, folk music and local homes."]],["jaipur","udaipur","jodhpur","jaisalmer"]]];
+
+var H=["Rajasthan’s story begins long before the Rajputs. At Kalibangan, in the north, archaeologists have found remains linked with the Indus civilisation, and the Aravalli hills, among the oldest in the world, have shaped the land for millions of years.","From the early medieval period, Rajput clans such as the Guhilas of Mewar, the Rathores of Marwar and the Kachwahas of Amber built forts, courts and trade routes across the region. Chittorgarh, Ranthambore, Jaisalmer and Kumbhalgarh grew from this era, and their battles and alliances with Delhi’s rulers shaped the culture.","Under the Mughals, many states made alliances while keeping their own courts. Later, in the 19th century, they signed treaties with the British as princely states.","After independence, the princely states were merged in stages. Rajasthan took its present form between 1949 and 1956, and Jaipur became its capital.","Today six hill forts (Amer, Chittorgarh, Kumbhalgarh, Ranthambore, Jaisalmer and Gagron) and Jantar Mantar are on UNESCO’s World Heritage list, and the walled city of Jaipur was added in 2019."];
+
+var $=function(i){return document.getElementById(i)};
+var SC={jaipur:'palace',jodhpur:'fort',jaisalmer:'dunes',udaipur:'lake',chittorgarh:'fort',bikaner:'dunes',bundi:'palace',ranthambore:'forest',sariska:'forest',kota:'lake',rajsamand:'fort','mehandipur-balaji':'temple'},SS={schools:'fort',colleges:'palace',corporate:'lake',friends:'dunes',international:'palace'};
+var SCN={fort:'<path d="M0 200V165l70-25 60 15V120h10v-12h10v12h10v-12h10v12h10v-12h10v12h10v40h60V135h10v-10h8v10h10v-10h8v10h10v25l60 10 70-20V200z"/>',palace:'<path d="M0 200V150h400v50zM30 150a22 22 0 0144 0zM100 150V105h20v-12a14 14 0 0128 0v12h20v45zM190 150a30 30 0 0160 0zM272 150V110h14v-10a12 12 0 0124 0v10h14v40zM340 150a22 22 0 0144 0z"/>',dunes:'<path d="M0 175Q70 120 150 165T290 150T400 135V200H0z"/><path d="M0 195Q90 165 190 185T400 170V200H0z" opacity=".7"/>',lake:'<path d="M0 150h400v50H0z" opacity=".5"/><path d="M40 150V120h14v-8a10 10 0 0120 0v8h14v30zM120 150a22 22 0 0144 0zM300 150l30-40 30 40z"/>',forest:'<path d="M0 200V170l20-60 20 60 15-50 20 50 20-70 20 70 20-55 20 55 20-65 20 65 20-50 20 50 20-60 20 60 20-55 20 55V200z"/>',temple:'<path d="M0 200V170h400v30zM170 170V120l30-60 30 60v50zM120 170V140l15-30 15 30v30zM250 170V140l15-30 15 30v30z"/>'};
+function art(k){var s='<circle cx="310" cy="62" r="26" fill="#ffe3a0" opacity=".55"/><path fill="#fff" opacity=".12" d="M0 140l70-40 60 30 80-50 90 55 100-40v105H0z"/><g fill="#2a0f4d" opacity=".62">'+SCN[k||'fort']+'</g>';return "url('data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice">'+s+'</svg>')+"')"}
+function bgs(k,c){return 'background-image:'+art(k)+',linear-gradient(160deg,'+c+',#2a0f4d);background-size:cover;background-position:bottom center;background-repeat:no-repeat'}
+var g=$('dgrid'),sg=$('sgrid');
+D.forEach(function(d,i){var a=document.createElement('a');a.className='dest';a.href='#'+d[0];a.style.cssText=bgs(SC[d[0]],d[3]);if(i>=8)a.hidden=true;a.innerHTML='<h3>'+d[1]+'</h3><span>'+d[2]+'</span>';g.appendChild(a)});
+S.forEach(function(s){var a=document.createElement('a');a.className='dest';a.href='#'+s[0];a.style.cssText=bgs(SS[s[0]],s[3]);a.innerHTML='<h3>'+s[1]+'</h3><span>'+s[4]+'</span>';sg.appendChild(a)});
+var sb=$('seeall');
+sb.onclick=function(){var open=sb.getAttribute('aria-expanded')==='true';[].slice.call(g.children).forEach(function(c,i){if(i>=8)c.hidden=open});sb.setAttribute('aria-expanded',!open);sb.textContent=open?'See all destinations':'Show fewer'};
+
+var C=[["Education trips","Learning-led itineraries for schools and colleges"],["Nightlife","Rooftop dinners, folk evenings, city night walks"],["Museums","Palace museums, miniature and textile collections"],["History","Forts, battlefields, stepwells, cenotaphs"],["Architecture","Havelis, jharokhas, Rajput and Indo-Islamic design"],["Art and craft","Miniature painting, block printing, blue pottery"],["Food","Dal baati, laal maas, kachori, Bikaneri sweets"],["Spiritual","Mehandipur Balaji, Nathdwara, Pushkar"]];
+$('chips').innerHTML=C.map(function(c){return'<div class="chip"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>'}).join('');
+
+var U=[["Sightseeing","Forts, palaces and hidden corners, planned for less queuing.","#b83f63"],["Local meals","Thali lunches, street snacks and a royal dinner.","#c98a1b"],["Culture","Folk music, puppetry, turban-tying and crafts.","#1b4b91"],["History","Stories from a guide who has visited every site.","#7a4a2b"],["Cinema","Film-location tours and a Rajasthani cinema evening.","#8a4e7a"],["Group-ready","School, college, corporate and international plans.","#2f7a78"]];
+var st=$('stage'),cur=0,timer,paused=false;
+U.forEach(function(u){var d=document.createElement('div');d.className='slide';var ix=U.indexOf(u);d.style.cssText=bgs(['fort','dunes','palace','temple','lake','forest'][ix],['#e4572e','#0d9488','#2563eb','#7c3aed','#d97706','#16a34a'][ix]);d.innerHTML='<i class="sh l"></i><i class="sh r"></i><h3>'+u[0]+'</h3><p>'+u[1]+'</p>';st.appendChild(d)});
+function render(){var n=U.length;[].forEach.call(st.children,function(s,i){var o=i-cur;if(o>n/2)o-=n;if(o<-n/2)o+=n;var a=Math.abs(o);s.style.transform='translateX('+o*62+'%) translateZ('+(-a*140)+'px) rotateY('+(-o*34)+'deg)';s.style.opacity=a>2?0:1-a*.28;s.style.zIndex=10-a;s.setAttribute('aria-hidden',a!==0);s.classList.toggle('on',a===0)})}
+function go(d){cur=(cur+d+U.length)%U.length;render()}
+function auto(){clearInterval(timer);if(!paused&&!matchMedia('(prefers-reduced-motion:reduce)').matches)timer=setInterval(function(){go(1)},3500)}
+$('next').onclick=function(){go(1);auto()};$('prev').onclick=function(){go(-1);auto()};
+var pb=$('pause');pb.onclick=function(){paused=!paused;pb.textContent=paused?'▶':'⏸';pb.setAttribute('aria-label',paused?'Play autoplay':'Pause autoplay');auto()};
+var x0=null;st.addEventListener('pointerdown',function(e){x0=e.clientX});
+st.addEventListener('pointerup',function(e){if(x0!==null&&Math.abs(e.clientX-x0)>35){go(e.clientX<x0?1:-1);auto()}x0=null});
+render();auto();
+
+/* menu */
+function menu(o){$('drawer').classList.toggle('open',o);$('veil').classList.toggle('on',o);$('burger').setAttribute('aria-expanded',o)}
+$('burger').onclick=function(){menu(true)};$('x').onclick=$('veil').onclick=function(){menu(false)};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')menu(false)});
+[].forEach.call($('drawer').querySelectorAll('a'),function(a){a.addEventListener('click',function(){menu(false)})});
+
+/* pages */
+var P={};
+function ban(c,t,s,k){return'<div class="banner" style="'+bgs(k,c)+'"><div class="wrap"><a href="#places">← All destinations</a> &nbsp; <a href="#">Home</a><h1>'+t+'</h1><p>'+s+'</p></div></div>'}
+function lk(a){return a.map(function(s){var d=D.filter(function(x){return x[0]===s})[0];return'<a href="#'+s+'">'+d[1]+'</a>'}).join('')}
+D.forEach(function(d){P[d[0]]=function(){
+return ban(d[3],d[1],d[2],SC[d[0]])+'<section><div class="wrap"><h2>History</h2><p class="lead">'+d[4]+'</p><h2 style="margin-top:36px">Places to visit</h2><ul class="pl">'+d[5].map(function(p){p=p.split('|');return'<li><b>'+p[0]+'</b><span>'+p[1]+'</span></li>'}).join('')+'</ul><div class="box"><b>Best time to visit:</b> '+d[6]+'.</div><p style="margin-top:24px"><a class="btn" href="#contact" data-pick="'+d[1]+'">Plan a trip to '+d[1]+'</a></p><h3 style="margin-top:36px">More destinations</h3><div class="links">'+lk(D.filter(function(x){return x[0]!==d[0]}).slice(0,6).map(function(x){return x[0]}))+'</div></div></section>'}});
+S.forEach(function(s){P[s[0]]=function(){
+return ban(s[3],s[1],s[2]+'. '+s[4],SS[s[0]])+'<section><div class="wrap"><h2>Why choose us for '+s[1].toLowerCase()+'</h2><ul class="pl">'+s[5].map(function(p){return'<li><b>'+p[0]+'</b><span>'+p[1]+'</span></li>'}).join('')+'</ul><h3 style="margin-top:30px">Popular places for this group</h3><div class="links">'+lk(s[6])+'</div><p style="margin-top:28px"><a class="btn" href="#contact" data-pick="'+s[1]+'">Get a quote for '+s[1].toLowerCase()+'</a></p></div></section>'}});
+P.history=function(){return ban('#7a4a2b','History of Rajasthan','From Indus-era towns to royal forts and a modern state.','fort')+'<section><div class="wrap">'+H.map(function(p){return'<p class="lead" style="margin-bottom:20px">'+p+'</p>'}).join('')+'<p><a class="btn" href="#places">Explore the places</a></p></div></section>'};
+
+var home=$('home'),pg=$('page');
+function route(){var h=location.hash.slice(1);
+if(P[h]){home.hidden=true;pg.hidden=false;pg.innerHTML=P[h]();window.scrollTo(0,0);document.title=h.charAt(0).toUpperCase()+h.slice(1).replace('-',' ')+' · Explore Rajasthan';
+[].forEach.call(pg.querySelectorAll('[data-pick]'),function(a){a.onclick=function(){var s=$('g'),v=a.dataset.pick;[].forEach.call(s.options,function(o){if(o.text.indexOf(v)===0)s.value=o.value});$('q').value='Interested in: '+v}})}
+else{home.hidden=false;pg.hidden=true;pg.innerHTML='';document.title='Explore Rajasthan';var e=h&&$(h);if(e)setTimeout(function(){e.scrollIntoView()},0);else window.scrollTo(0,0)}}
+window.addEventListener('hashchange',route);route();
+
+$('f').onsubmit=function(e){e.preventDefault();$('msg').textContent='Thanks, '+$('n').value+'. Priyansh will get back to you soon. (Demo: connect this form to email or WhatsApp.)';e.target.reset()};
+</script>
+<script>
+/* ---------- animated animals ---------- */
+var AN={};
+function leg(x,y,w,h,d,o){return'<g transform="translate('+x+' '+y+')"'+(o?' opacity=".72"':'')+'><g class="lg" style="animation-delay:-'+(d*.9)+'s"><path d="M'+(-w)+' 0L'+w+' 0L'+(w*.7)+' '+(h*.5)+'L'+(w*1.05)+' '+(h*.72)+'L'+(w*.8)+' '+h+'L'+(-w*.8)+' '+h+'L'+(-w*.65)+' '+(h*.72)+'L'+(-w*.8)+' '+(h*.5)+'z"/></g></g>'}
+AN.camel=function(c){return'<svg class="an camel" viewBox="0 0 122 100" fill="currentColor" aria-hidden="true"><g class="bob">'+leg(40,54,3.6,44,1,1)+leg(86,54,3.6,44,0,1)+leg(31,54,3.8,44,0)+leg(77,54,3.8,44,1)+'<path d="M20 46Q18 34 32 32Q38 14 50 14Q60 14 64 30L86 32Q96 36 94 48Q92 58 82 58H32Q20 58 20 46z"/><path d="M36 34Q50 26 66 34L64 48Q50 42 38 48z" fill="'+(c||'#e4572e')+'"/><path class="tail" style="transform-origin:21px 40px" d="M20 38Q10 44 12 62L15 62Q15 48 22 42z"/><g class="neck" style="transform-origin:84px 40px"><path d="M82 34Q96 32 100 20Q103 8 111 7Q120 8 120 14Q119 19 111 19Q107 30 103 42Q96 52 84 48z"/><path d="M110 8l3-6 3 6z"/><circle cx="112" cy="12" r="1.4" fill="#fff"/></g></g></svg>'};
+AN.elephant=function(c){return'<svg class="an elephant" viewBox="0 0 140 100" fill="currentColor" aria-hidden="true"><g class="bob">'+leg(40,62,7,36,1,1)+leg(94,62,7,36,0,1)+leg(54,62,7.5,36,0)+leg(82,62,7.5,36,1)+'<path d="M24 44Q24 22 52 20Q86 18 96 34Q100 56 92 66L30 66Q22 60 24 44z"/><path class="tail" style="transform-origin:26px 36px" d="M24 36Q14 46 18 64L21 64Q20 50 28 40z"/><path d="M38 22Q60 14 84 26L82 50Q60 40 40 50z" fill="'+(c||'#e4572e')+'"/><path d="M40 40Q60 30 82 40" stroke="#ffb000" stroke-width="3" fill="none"/><path d="M52 17H78L74 8H56z" fill="#ffb000"/><path d="M56 8Q65 -3 74 8z" fill="#ffb000"/><path d="M92 24Q104 12 118 22Q124 36 116 52Q108 62 94 58z"/><circle cx="111" cy="33" r="1.8" fill="#fff"/><g class="ear" style="transform-origin:98px 30px"><path d="M98 26Q80 22 80 42Q82 58 99 52z" opacity=".85"/></g><g class="trunk" style="transform-origin:112px 46px"><path d="M112 40Q130 46 128 78Q126 90 118 88Q122 70 110 58z"/></g><path d="M108 54Q122 60 130 50Q122 68 106 60z" fill="#f5f0e0"/></g></svg>'};
+AN.horse=function(c){return'<svg class="an horse" viewBox="0 0 120 100" fill="currentColor" aria-hidden="true"><g class="bob">'+leg(36,52,2.6,46,1,1)+leg(80,52,2.6,46,0,1)+leg(28,52,2.8,46,0)+leg(72,52,2.8,46,1)+'<path d="M24 38Q22 26 36 26L78 26Q90 26 90 38Q90 50 80 54L34 54Q24 52 24 38z"/><path d="M34 28Q54 20 74 28L72 40Q54 34 36 40z" fill="'+(c||'#ffb000')+'"/><path class="tail" style="transform-origin:26px 34px" d="M26 32Q8 34 6 62Q14 50 22 44z"/><g class="neck" style="transform-origin:80px 36px"><path d="M74 30Q86 24 92 12Q96 4 102 6L112 22Q116 30 110 32Q106 28 102 28Q98 40 90 48Q82 52 76 46z"/><path d="M96 8Q92 -4 99 -6Q97 1 100 6zM102 6Q102 -5 109 -5Q105 2 106 8z"/><path d="M92 10Q82 18 80 34L86 30Q86 22 94 14z" opacity=".8"/><circle cx="104" cy="15" r="1.5" fill="#fff"/></g></g></svg>'};
+function wk(v,dur,dl,b){return v.replace('<svg ','<svg style="position:absolute;left:0;bottom:'+b+'%;z-index:1;animation:walk '+dur+'s linear '+dl+'s infinite" ')}
+var car=document.querySelector('svg.car');if(car)car.outerHTML='<div class="car" aria-hidden="true">'+wk(AN.camel(),54,-8,5)+wk(AN.horse(),44,-22,3)+wk(AN.camel('#12c2b9'),64,-40,1)+wk(AN.elephant(),78,-58,0)+'</div>';
+var cg=document.querySelector('#contact .scene g');if(cg)cg.remove();
+$('contact').insertAdjacentHTML('beforeend','<div class="car2" aria-hidden="true">'+wk(AN.elephant('#12c2b9'),80,-15,10)+wk(AN.camel(),58,-35,18)+wk(AN.horse('#e4572e'),46,-5,8)+wk(AN.camel('#ffb000'),68,-50,14)+'</div>');
+
+/* ---------- city details ---------- */
+var X={
+jaipur:['Eastern Rajasthan, on a semi-arid plain ringed by Aravalli hills. Summers are hot, winters are mild and pleasant.','Dal baati churma, laal maas, pyaaz kachori, mawa kachori, ghewar (a monsoon sweet) and sweet lassi.','Sanganer and Bagru block printing, blue pottery, gem cutting, lac bangles and the Jaipur gharana of Kathak dance.','Teej and Gangaur in the monsoon and spring, Makar Sankranti kite flying in January, and the Jaipur Literature Festival in winter.',['food-cooking','craft-workshops','heritage-walks','zipline-adventure']],
+jodhpur:['Western Rajasthan on the edge of the Thar, with a red sandstone ridge under the fort. Very hot summers, dry winters.','Mirchi vada, pyaaz kachori, makhaniya lassi, mawa kachori, laal maas and gulab jamun ki sabzi.','Marwari horses, bandhgala coats and jutti shoes, Manganiyar and Langa folk music, and the Bishnoi community known for protecting wildlife.','Marwar Festival and the Rajasthan International Folk Festival (RIFF) at Mehrangarh, both in the cooler months.',['village-stay','zipline-adventure','heritage-walks','horse-riding']],
+jaisalmer:['Deep in the Thar Desert near the Pakistan border. Golden sandstone, very low rainfall, dunes at Sam and Khuri, hot days and cold winter nights.','Ker sangri, gatte ki sabzi, bajre ki roti, ghotua ladoo and desert-style thali.','Langa and Manganiyar musicians, kamaicha and khartal instruments, Kalbeliya dance and puppet shows.','The Desert Festival in February, with turban tying, camel events and folk performances.',['desert-safari','dance','poetry','photography']],
+udaipur:['Mewar, in a valley of the Aravallis with lakes (Pichola, Fateh Sagar, Udai Sagar). Greener than most of Rajasthan, especially after the monsoon.','Dal baati, Mewari kadhi, bhutte ka kees, poha jalebi and malai ghewar.','Miniature painting, Pichwai art, puppetry, Ghoomar evening shows and Gavri dance of the Bhil community.','Mewar Festival in spring (linked with Gangaur), Shilpgram Utsav in December and Hariyali Amavasya fair.',['lake-sunset','craft-workshops','dance','horse-riding']],
+chittorgarh:['Rises from the Mewar plain, with a fort hill of about 180 metres over dry deciduous scrub. The Berach and Gambhiri rivers flow nearby.','Dal baati churma, bajra roti with garlic chutney, gatte ki sabzi and malpua.','Mewar traditions of valour and devotion, Meera bhajans and Gair folk dance.','Teej, Gangaur and Navratri celebrations, with cultural events at the fort in winter.',['heritage-walks','photography','village-stay']],
+bikaner:['North-western Thar, sandy with scrub, very hot summers and cold winter nights.','Bhujia, rasgulla, papad, kachori, ker sangri and Bikaneri halwai sweets.','Camel culture, usta art (gold-leaf painting), and the fire dance of the Jasnathi community.','The Camel Festival in January, with parades, races and folk music.',['desert-safari','food-cooking','heritage-walks']],
+bundi:['Hadoti region, among hills and lakes close to the Chambal basin. Greener in monsoon and quiet all year.','Dal bati, Hadoti kachori, malpua, kadhi and bajra dishes.','The Bundi school of miniature painting, Hadoti folk songs and old-town crafts.','Bundi Utsav around Kartik Purnima (October–November) and Teej in the monsoon.',['photography','heritage-walks','craft-workshops']],
+ranthambore:['Where the Aravalli and Vindhya hills meet, in Sawai Madhopur district. Dry deciduous forest with lakes and ruins.','Dal baati churma, kachori, mirchi vada and a simple local thali.','Villages of the Meena and Gurjar communities with folk songs, and the Trinetra Ganesh temple at the fort.','The Ganesh Chaturthi fair at Ranthambore Fort, with pilgrims from many districts.',['jeep-safari','heritage-walks','photography']],
+sariska:['An Aravalli valley in Alwar district, with rocky hills, dry forest and seasonal streams.','Alwar’s milk cake (kalakand), dal baati and local village meals.','Meo community songs, Mewati culture and Mahabharata legends at Pandupol.','Annual fairs at Pandupol and Neelkanth, with dates that vary each year.',['jeep-safari','photography','village-stay']],
+kota:['The Hadoti plateau on the Chambal river, with fertile flat farmland and big irrigation works.','Kota kachori, kadhi kachori, dal baati, mawa sweets and poha jalebi.','Kota Doria weaving, Hadoti painting and the grand Dussehra fair.','Kota Dussehra Mela in October, and local Teej and Gangaur celebrations.',['lake-sunset','craft-workshops','photography']],
+rajsamand:['Aravalli country with Rajsamand Lake, Kumbhalgarh’s forests and marble quarries.','Mewari dal baati, makai ki roti, makai ki rabdi and Nathdwara prasad sweets.','Pichwai painting from Nathdwara and the Kumbhalgarh Festival’s music and dance.','Kumbhalgarh Festival in December and large Janmashtami celebrations at Nathdwara.',['heritage-walks','horse-riding','village-stay']],
+'mehandipur-balaji':['Between Aravalli ridges in the Dausa region, semi-arid with ruins such as Abhaneri’s stepwell nearby.','Simple vegetarian meals, prasad sweets (laddu and boondi) and local thali.','Devotional bhajans and aarti, with large crowds at Hanuman Jayanti and Navratri.','Hanuman Jayanti, Chaitra Navratri and the Abhaneri Festival in the cooler months.',['heritage-walks','photography']]};
+
+var A=[
+['desert-safari','Desert camel safari and dune camping','#d97706','dunes','Jaisalmer, Bikaner','Sam and Khuri dunes near Jaisalmer, and dunes around Bikaner.','A sunset camel ride across the dunes, then a night at a camp with folk music, a bonfire and a Rajasthani dinner. A jeep dune drive is optional.',['Camel and jeep with trained handlers','Tented camp with beds and washrooms','Dinner, breakfast and tea','Folk music and Kalbeliya dance evening','Guide and first-aid kit']],
+['jeep-safari','Jeep safari and forest reserves','#16a34a','forest','Ranthambore, Sariska','Ranthambore National Park and Sariska Tiger Reserve.','Guided open-jeep or canter drives at dawn and late afternoon through dry forest, lakes and ruins, looking for tigers, leopards, deer and birds. Wildlife sightings are never guaranteed.',['Safari booking support (permits are limited, so we book early)','Naturalist briefing before you go','Binoculars on request','Packed breakfast','Rules and safety talk']],
+['food-cooking','Food trails and cooking classes','#e4572e','palace','Jaipur, Jodhpur, Udaipur, Bikaner','The old cities and local home kitchens.','Taste kachori, mirchi vada, lassi and sweets on a guided street walk, then cook dal baati churma, laal maas or a vegetarian thali in a local home.',['Local host or chef','Ingredients and recipe cards','Vegetarian, Jain and non-veg options','A full tasting meal','Hygiene-checked stops']],
+['poetry','Poetry and storytelling evenings','#7c3aed','dunes','Jaisalmer, Udaipur, Jaipur','Desert camps, rooftops and old havelis.','Listen to Rajasthani folk poetry and couplets (doha), then write your own short verses with a local poet and Priyansh. We end with an open mic under the stars. Hindi, Rajasthani, Urdu and English are all welcome.',['Local poet or storyteller','Notebooks and pens','Tea, snacks and lamps','A printed souvenir of the group’s verses','Translation help for guests']],
+['dance','Folk dance and music workshops','#0d9488','palace','Jaisalmer, Udaipur, Jaipur','Camps, courtyards and heritage hotels.','Learn basic steps of Ghoomar, Kalbeliya and Terah Tali from folk artists, try instruments such as khartal and dholak, and dance together at the end.',['Folk artists as teachers','Costume try-on (odhni, ghagra, safa)','Instruments to try','Group photos','An evening performance']],
+['craft-workshops','Art and craft workshops','#2563eb','palace','Jaipur, Udaipur, Kota','Jaipur (block printing, blue pottery), Udaipur (miniature painting), Kota (Doria weaving).','Make your own piece: stamp a block-printed scarf, paint on blue pottery or try miniature brushwork with a master artist.',['Master artists','Materials and apron','Take-home finished piece','Studio visit','Help with shipping larger pieces']],
+['heritage-walks','Heritage and architecture walks','#b45309','fort','Jaipur, Jodhpur, Udaipur, Bundi, Bikaner','Old cities, forts, havelis, stepwells and bazaars.','Guided walks that explain jharokhas, jaalis, chhatris and murals, with stories of the people behind them.',['Story-led guide','Entry tickets as per package','Sketching and photo stops','Water and rest breaks','Audio headsets for large groups']],
+['zipline-adventure','Fort ziplines and adventure','#dc2626','fort','Jodhpur, Jaipur','Ziplines at forts such as Mehrangarh (Jodhpur) and around Amer (Jaipur). Availability and rules may change.','Fly over fort walls and lakes on ziplines, with rappelling and short hikes for groups who want adventure.',['Licensed adventure operator','Harness and helmet','Safety briefing','Age and weight checks','Photos on request']],
+['village-stay','Village stays and Bishnoi safari','#65a30d','dunes','Jodhpur, Chittorgarh, Sariska','Villages near Jodhpur and other rural areas.','Meet potters, weavers and farmers, ride a jeep with a Bishnoi family to see blackbuck and chinkara, and share a home-cooked meal.',['Local host family','Jeep with local driver','Home-cooked meal','Craft demos','Fair-trade shopping']],
+['horse-riding','Marwari horse riding','#9333ea','fort','Udaipur, Jodhpur, Rajsamand','Village trails around Udaipur, Jodhpur and Mewar.','Ride the curved-ear Marwari horses on village trails and at sunset, from beginner to experienced.',['Horses and trained grooms','Helmets and boots','Instructor','Sunset trail','Tea stop']],
+['lake-sunset','Lakes, boats and sunsets','#0891b2','lake','Udaipur, Kota, Jaisalmer','Lake Pichola and Fateh Sagar (Udaipur), Kishore Sagar (Kota) and Gadisar (Jaisalmer).','Slow boat rides at golden hour with palaces on the water, followed by a rooftop dinner.',['Boat tickets','Life jackets','Rooftop dinner option','Photo stops','Timing for the best light']],
+['photography','Photography and stepwell walks','#be123c','fort','Abhaneri, Bundi, Chittorgarh, Jaipur','Stepwells, forts and old-city lanes.','Early-morning light at stepwells and forts, portraits in the old city and a short composition lesson.',['Photo-walk leader','Best-light timing','Guidance on permissions','Tripod help','Editing tips']]];
+function AC(s){return A.filter(function(a){return a[0]===s})[0]}
+
+var I={
+jaipur:['Arrive, check in, Hawa Mahal and Johari Bazaar walk','Amer Fort, Jal Mahal photo stop, City Palace and Jantar Mantar','Nahargarh sunset, Albert Hall Museum and block-printing workshop','Food trail, shopping and departure'],
+jodhpur:['Arrive, Clock Tower and Sardar Market','Mehrangarh Fort, Jaswant Thada and optional zipline','Bishnoi village safari and Umaid Bhawan Palace museum','Brahmpuri blue lanes walk and departure'],
+jaisalmer:['Arrive, Gadisar Lake and fort walk','Jaisalmer Fort, Patwon Ki Haveli and Bada Bagh sunset','Camel safari at the Sam dunes, folk music and a desert camp night','Kuldhara visit and departure'],
+udaipur:['Arrive and Lake Pichola sunset boat ride','City Palace, Saheliyon Ki Bari and the evening dance show at Bagore Ki Haveli','Day trip to Kumbhalgarh and Haldighati','Sajjangarh, Shilpgram crafts and departure'],
+chittorgarh:['Arrive, Gaumukh Kund and evening town walk','Full-day fort tour: Vijay Stambh, Kirti Stambh and palaces','Meera Temple, Sanwaliaji Temple and a village visit','Sunrise fort walk and departure'],
+bikaner:['Arrive, Kote Gate bazaar and sweets','Junagarh Fort, Lalgarh Palace and Bhandasar Jain Temple','Karni Mata Temple, Camel Research Centre and dune sunset','Departure'],
+bundi:['Arrive, Bundi Palace and murals','Taragarh Fort and stepwell walk','Nawal Sagar, Kshar Bagh and old-town food','Optional Kota visit and departure'],
+ranthambore:['Arrive, orientation and village walk','Morning and afternoon safari','Ranthambore Fort and Surwal Lake','Crafts, leisure and departure'],
+sariska:['Arrive and forest briefing','Morning safari and Kankwadi Fort','Pandupol temple and Bhangarh day trip','Alwar City Palace and departure'],
+kota:['Arrive, Kota Garh and the museum','Garadia Mahadev and Chambal Garden','Day trip to Gagron Fort (UNESCO)','Kota Doria shopping and departure'],
+rajsamand:['Arrive, Nathdwara darshan and Pichwai art','Kumbhalgarh Fort and wall walk','Haldighati and Rajsamand Lake','Wildlife sanctuary walk and departure'],
+'mehandipur-balaji':['Arrive, rest and visit Abhaneri’s Chand Baori','Early Balaji darshan (times vary) and a local meal','Bhangarh or Dausa fort','Departure via Jaipur']};
+var PKI={
+schools:['Transport for the full group in seat-belted vehicles','Family-friendly stays with teachers close to students','All meals, vegetarian by default, with allergy notes','Worksheets and site guides linked to syllabus topics','Teacher and parent updates, emergency contacts and a first-aid kit'],
+colleges:['Transport and shared-room stays at student-friendly rates','Breakfast and dinner, with a street-food trail','Guided architecture, history and art walks','An evening of music, bonfire or open mic','A single group-leader contact for the club or department'],
+corporate:['Comfortable AC transport and chosen hotels','Meeting-friendly venue time if needed','Team games, a heritage challenge and a group dinner','All meals and a single coordinator','Invoice and documents for company records'],
+friends:['Flexible stays and vehicles for your group size','Games, a bonfire and a music evening','One fun activity of your choice (safari, dunes or zipline)','Breakfast and one special dinner','Photo stops, with a local photographer on request'],
+international:['Airport pickup and drop','Comfortable stays with English-speaking staff','Private guide and car for the group','Welcome briefing on customs and safety','A cooking class or folk evening included']};
+
+/* ---------- pages ---------- */
+ban=function(c,t,s,k){return'<div class="banner" style="'+bgs(k,c)+'"><div class="wrap"><a href="#">Home</a> &nbsp; <a href="#places">Destinations</a> &nbsp; <a href="#activities">Activities</a> &nbsp; <a href="#packages">Packages</a><h1>'+t+'</h1><p>'+s+'</p></div></div>'};
+function card(h,t,s,k,c){return'<a class="dest" href="'+h+'" style="'+bgs(k,c)+'"><h3>'+t+'</h3><span>'+s+'</span></a>'}
+function more(s){var x=X[s];if(!x)return'';return'<div class="g4"><div class="box"><b>Geography and area</b><br>'+x[0]+'</div><div class="box"><b>What to eat</b><br>'+x[1]+'</div><div class="box"><b>Culture, music and dance</b><br>'+x[2]+'</div><div class="box"><b>Festivals</b><br>'+x[3]+'</div></div><h3 style="margin-top:28px">Activities here</h3><div class="links">'+x[4].map(function(a){return'<a href="#act-'+a+'">'+AC(a)[1]+'</a>'}).join('')+'</div><p style="margin-top:14px"><a class="btn ghost" href="#pk-friends-'+s+'">See the 4-day package</a></p>'}
+D.forEach(function(d){var o=P[d[0]];P[d[0]]=function(){return o().replace('<h2 style="margin-top:36px">Places to visit</h2>',more(d[0])+'<h2 style="margin-top:36px">Places to visit</h2>')}});
+S.forEach(function(s){var o=P[s[0]];P[s[0]]=function(){return o().replace('<p style="margin-top:28px">','<p style="margin-top:28px"><a class="btn ghost" href="#pk-'+s[0]+'">See 4-day packages</a> &nbsp; ')}});
+P.activities=function(){return ban('#0d9488','Activities','Desert, forest, food, poetry, dance, craft and adventure.','dunes')+'<section><div class="wrap"><div class="grid">'+A.map(function(a){return card('#act-'+a[0],a[1],a[4],a[3],a[2])}).join('')+'</div></div></section>'};
+A.forEach(function(a){P['act-'+a[0]]=function(){var cs=D.filter(function(d){return X[d[0]][4].indexOf(a[0])>-1}).map(function(d){return d[0]});return ban(a[2],a[1],a[4],a[3])+'<section><div class="wrap"><h2>What it is</h2><p class="lead">'+a[6]+'</p><div class="box"><b>Where:</b> '+a[5]+'</div><h2 style="margin-top:30px">What we provide</h2><ul class="pl">'+a[7].map(function(p){return'<li><b>'+p+'</b></li>'}).join('')+'</ul>'+(cs.length?'<h3>Best in these cities</h3><div class="links">'+lk(cs)+'</div>':'')+'<p style="margin-top:24px"><a class="btn" href="#contact" data-pick="'+a[1]+'">Book this activity</a> &nbsp; <a class="btn ghost" href="#activities">More activities</a></p></div></section>'}});
+P.packages=function(){return ban('#e4572e','Packages','One 4-day package for every city, built for your group. Choose who is travelling.','palace')+'<section><div class="wrap"><div class="grid">'+S.map(function(s){return card('#pk-'+s[0],s[1],'4-day packages',SS[s[0]],s[3])}).join('')+'</div></div></section>'};
+S.forEach(function(s){P['pk-'+s[0]]=function(){return ban(s[3],s[1]+' packages','Pick a city. Each package is 4 days. Prices on request.',SS[s[0]])+'<section><div class="wrap"><div class="grid">'+D.map(function(d){return card('#pk-'+s[0]+'-'+d[0],d[1],'4-day package',SC[d[0]],d[3])}).join('')+'</div></div></section>'};
+D.forEach(function(d){P['pk-'+s[0]+'-'+d[0]]=function(){var x=X[d[0]];return ban(d[3],d[1]+': 4-day package','For '+s[1].toLowerCase()+'. Prices on request, based on group size and dates.',SC[d[0]])+'<section><div class="wrap"><h2>Day by day</h2><ul class="pl">'+I[d[0]].map(function(t,i){return'<li><b>Day '+(i+1)+'</b><span>'+t+'</span></li>'}).join('')+'</ul><h2 style="margin-top:30px">Included for '+s[1].toLowerCase()+'</h2><ul class="pl">'+PKI[s[0]].map(function(t){return'<li><b>'+t+'</b></li>'}).join('')+'</ul><h3>Add an activity</h3><div class="links">'+x[4].map(function(a){return'<a href="#act-'+a+'">'+AC(a)[1]+'</a>'}).join('')+'</div><p style="margin-top:24px"><a class="btn" href="#contact" data-pick="'+s[1]+'">Request this package</a> &nbsp; <a class="btn ghost" href="#pk-'+s[0]+'">Other cities</a></p></div></section>'}})});
+
+/* ---------- home + menu ---------- */
+$('groups').insertAdjacentHTML('beforebegin','<section id="actsec" style="background-color:#4c1d95"><div class="wrap"><h2>Things to do</h2><p class="lead">Desert nights, jeep safaris, food trails, poetry, dance and crafts. Open any activity to see where it is, what it is and what we provide.</p><div class="grid" id="agrid" style="margin-top:20px">'+A.slice(0,6).map(function(a){return card('#act-'+a[0],a[1],a[4],a[3],a[2])}).join('')+'</div><p><a class="btn" href="#activities">See all activities</a></p></div></section>');
+document.querySelector('#groups .wrap').insertAdjacentHTML('beforeend','<p><a class="btn" href="#packages">Browse 4-day packages</a></p>');
+var dr=$('drawer');dr.querySelector('a[href="#places"]').insertAdjacentHTML('afterend','<a href="#activities">Activities</a><a href="#packages">Packages</a>');
+[].forEach.call(dr.querySelectorAll('a'),function(a){a.addEventListener('click',function(){menu(false)})});
+route();
+</script>
+<script>
+
+function U(inner,vb){return 'url("data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" preserveAspectRatio="none">'+inner+'</svg>')+'")'}
+function fort(){var p='M0 200V138',i,t='';for(i=0;i<50;i++)p+='v-12h12v12h12';p+='V200z';
+[[90,3],[330,4],[620,3],[880,4],[1110,3]].forEach(function(a,k){var n=a[1],top=64+k%3*22,q='M'+a[0]+' 200V'+top+'v-12';for(var j=0;j<n;j++)q+='h12v12h12v-12';t+='<path d="'+q+'V200z"/><path d="M'+(a[0]+n*12-8)+' 200v-26a8 8 0 0116 0v26z" fill="#fff" opacity=".12"/>'});
+return '<g fill="#06103a" opacity=".8"><path d="'+p+'"/>'+t+'</g>'}
+function dunes(){return '<path d="M0 90Q150 30 320 80T640 70T960 60T1200 50V200H0z" fill="#b45309"/><path d="M0 140Q200 90 420 130T820 120T1200 100V200H0z" fill="#7c2d05"/><path d="M180 130l26-30 26 30zM640 122l22-26 22 26zM900 118l20-24 20 24z" fill="#1c0a05"/>'}
+function stars(){var c='<circle cx="500" cy="60" r="22" fill="#ffe9a8" opacity=".9"/>';[[40,30],[120,90],[210,40],[300,110],[390,25],[600,100],[680,40],[760,120],[850,60],[940,30],[1000,100],[1120,50],[1160,130]].forEach(function(a){c+='<circle cx="'+a[0]+'" cy="'+a[1]+'" r="2" fill="#fff"/>'});return c}
+function chh(x,w,h){var ys=200-h*.6,r=w*.38,c=x+w/2,o='<rect x="'+x+'" y="'+ys+'" width="'+w+'" height="8"/>';for(var i=0;i<4;i++)o+='<rect x="'+(x+w*.1+i*w*.255)+'" y="'+(ys+8)+'" width="'+(w*.07)+'" height="'+(200-ys-8)+'"/>';return o+'<path d="M'+(x+w*.12)+' '+ys+'a'+r+' '+(r*1.1)+' 0 0 1 '+(w*.76)+' 0z"/><rect x="'+(c-1.5)+'" y="'+(ys-r*1.1-16)+'" width="3" height="16"/>'}
+function palace(){var o='<g fill="#4a0f05" opacity=".7"><rect x="0" y="186" width="1200" height="14"/>';[[40,110,150],[230,90,120],[400,150,190],[620,100,140],[800,130,170],[1020,110,150]].forEach(function(a){o+=chh(a[0],a[1],a[2])});return o+'</g>'}
+function theme(id,img,h,pos,grad){var e=$(id);e.style.backgroundImage=img.concat([grad]).join(',');e.style.backgroundSize=h;e.style.backgroundPosition=pos;e.style.backgroundRepeat='no-repeat'}
+theme('places',[U(fort(),'0 0 1200 200')],'100% 190px,100% 100%','bottom,center','linear-gradient(#0a2a73 0%,#2f86d6 62%,#f6c75e 100%)');
+theme('actsec',[U(dunes(),'0 0 1200 200'),U(stars(),'0 0 1200 160')],'100% 190px,100% 38%,100% 100%','bottom,top,center','linear-gradient(#0b0f33 0%,#2b1672 55%,#c2410c 100%)');
+theme('groups',[U(palace(),'0 0 1200 200')],'100% 200px,100% 100%','bottom,center','linear-gradient(#7c1d0b 0%,#d4491c 58%,#ffb347 100%)');
+</script>
+</body>
+</html>
